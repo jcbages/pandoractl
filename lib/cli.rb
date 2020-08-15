@@ -2,9 +2,31 @@ require 'faraday'
 require 'json'
 require 'thor'
 
+require_relative '../bundle/bundler/setup'
+
 class API
 
     BASE_URL = 'https://not-a-db.com'
+
+    def initialize
+        @app_dir = "#{ENV['HOME']}/.admin-cli"
+        if !Dir.exist?(@app_dir)
+            Dir.mkdir(@app_dir)
+        end
+
+        load_token!
+    end
+
+    def load_token!
+        token_path = "#{@app_dir}/token"
+        if File.exist?(token_path)
+            @token = File.read(token_path)
+        end
+    end
+
+    def save_token!(token)
+        File.open("#{@app_dir}/token", 'w') {|f| f.write(token)}
+    end
 
     def setup_request(request, body: nil, auth: false)
         if !body.nil?
@@ -18,7 +40,6 @@ class API
     end
 
     def make_request(method, url, body: nil, auth: false)
-        @token = 'eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjVmMzAzMjJjOWE0YjkxNGEwMGRiZmE1ZiIsIm5hbWUiOiJKdWFuIiwiZW1haWwiOiJqY2JhZ2VzOTVAZ21haWwuY29tIn0.JNuE-jW2AeGQ9tRagMXMJrxWWhqutXMrvNGZ8dMLvwg'
         if auth && @token.nil?
             return 401, {'message' => 'You are not logged in. Make sure you run login EMAIL PASSWORD first'}
         end
@@ -52,7 +73,7 @@ class API
         if status != 200
             [false, body['message']]
         else
-            @token = body['token']
+            save_token!(body['token'])
             [true, nil]
         end
     end
@@ -126,7 +147,7 @@ class CLI < Thor
     def login(email, password)
         ok, result = @api.login(email, password)
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts '🎉 Done, you are logged in!'
         end
@@ -137,7 +158,7 @@ class CLI < Thor
     def get_services
         ok, result = @api.get_services(service_id: options[:id])
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts JSON.pretty_generate(result)
         end
@@ -147,7 +168,7 @@ class CLI < Thor
     def create_service(name)
         ok, result = @api.create_service(name)
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts JSON.pretty_generate(result)
         end
@@ -157,7 +178,7 @@ class CLI < Thor
     def set_custom_host(service_id, host)
         ok, result = @api.set_custom_host(service_id, host)
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts "🎉 #{result}"
         end
@@ -167,7 +188,7 @@ class CLI < Thor
     def delete_custom_host(service_id)
         ok, result = @api.delete_custom_host(service_id)
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts "🎉 #{result}"
         end
@@ -177,12 +198,10 @@ class CLI < Thor
     def delete_service(service_id)
         ok, result = @api.delete_service(service_id)
         if !ok
-            puts "❌ Error: #{result}"
+            $stderr.puts "❌ Error: #{result}"
         else
             puts "🎉 #{result}"
         end
     end
 
 end
-
-CLI.start(ARGV)
