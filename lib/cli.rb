@@ -28,6 +28,13 @@ class API
         File.open("#{@app_dir}/token", 'w') {|f| f.write(token)}
     end
 
+    def delete_token!
+        token_path = "#{@app_dir}/token"
+        if File.exist?(token_path)
+            File.delete(token_path)
+        end
+    end
+
     def setup_request(request, body: nil, auth: false)
         if !body.nil?
             request.headers['Content-Type'] = 'application/json'
@@ -76,6 +83,10 @@ class API
             save_token!(body['token'])
             [true, nil]
         end
+    end
+
+    def logout
+        delete_token!
     end
 
     def get_services(service_id: nil)
@@ -150,6 +161,16 @@ class CLI < Thor
             $stderr.puts "❌ Error: #{result}"
         else
             puts '🎉 Done, you are logged in!'
+        end
+    end
+
+    desc 'logout', 'Logout from the system'
+    def logout
+        ok, result = @api.logout
+        if !ok
+            $stderr.puts "❌ Error: #{result}"
+        else
+            puts "👋 See you later!"
         end
     end
 
