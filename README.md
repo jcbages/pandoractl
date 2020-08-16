@@ -3,7 +3,7 @@
 # Prerequisites
 
 - Ruby (tested with 2.5+). You can use `rbenv` ([https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)).
-- Bundler (bundler with 2.1.2) ([https://bundler.io](https://bundler.io/)).
+- Bundler (bundler with 2.1.4) ([https://bundler.io](https://bundler.io/)).
 
 # Installation
 

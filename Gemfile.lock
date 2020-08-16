@@ -10,8 +10,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  faraday
-  thor
+  faraday (= 1.0.1)
+  thor (= 1.0.1)
 
 BUNDLED WITH
-   2.1.2
+   2.1.4
