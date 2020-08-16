@@ -1,8 +1,8 @@
+require_relative '../bundle/bundler/setup'
+
 require 'faraday'
 require 'json'
 require 'thor'
-
-require_relative '../bundle/bundler/setup'
 
 class API
 
