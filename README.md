@@ -28,7 +28,7 @@ $ ./bin/pandoractl
 
 ## Add binary to PATH
 
-You can add `pandoractl` binary to you path by adding this to the end of your `.bash_profile` / `.bash_rc` file:
+You can add `pandoractl` binary to you path by adding this to the end of your `.bash_profile` / `.bashrc` file:
 
 ```bash
 export PATH=$PATH:<path_to_pandoractl_folder>/bin
@@ -37,7 +37,7 @@ export PATH=$PATH:<path_to_pandoractl_folder>/bin
 Then you need to `source` the file you modified so that your changed are applied:
 
 ```bash
-$ source ~/.bash_profile (or ~/.bash_rc)
+$ source ~/.bash_profile (or ~/.bashrc)
 ```
 
 🎉Yay! Now you can run `pandoractl` from everywhere on your terminal.
