@@ -1,3 +1,3 @@
 source 'https://rubygems.org'
-gem 'faraday'
-gem 'thor'
+gem 'faraday', '1.0.1'
+gem 'thor', '1.0.1'

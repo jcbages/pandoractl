@@ -1,5 +1,10 @@
 `pandoractl` is a CLI for performing admin operations. It's a wrapper around admin API endpoints for making it easier to interact with the Pandora system.
 
+# Prerequisites
+
+- Ruby (tested with 2.5+). You can use `rbenv` ([https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)).
+- Bundler (bundler with 2.1.2) ([https://bundler.io](https://bundler.io/)).
+
 # Installation
 
 Clone this repository into your machine:
@@ -8,10 +13,16 @@ Clone this repository into your machine:
 $ git clone https://github.com/jcbages/pandoractl.git
 ```
 
-Go into the `pandoractl` folder
+Go into the `pandoractl` folder:
 
 ```bash
 $ mv <path_to_pandoractl_folder>
+```
+
+Install the required dependencies:
+
+```bash
+$ bundle install --standalone
 ```
 
 Add execution permissions to the CLI binary:
