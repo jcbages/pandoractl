@@ -2,8 +2,7 @@
 
 # Prerequisites
 
-- Ruby (tested with 2.5+). You can use `rbenv` ([https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)).
-- Bundler (bundler with 2.1.4) ([https://bundler.io](https://bundler.io/)).
+- Ruby (2.6.x or 2.7.x). You can use `rbenv` for this ([https://github.com/rbenv/rbenv](https://github.com/rbenv/rbenv)).
 
 # Installation
 
@@ -17,12 +16,6 @@ Go into the `pandoractl` folder:
 
 ```bash
 $ cd <path_to_pandoractl_folder>
-```
-
-Install the required dependencies:
-
-```bash
-$ bundle install --standalone
 ```
 
 Add execution permissions to the CLI binary:
