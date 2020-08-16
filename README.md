@@ -16,7 +16,7 @@ $ git clone https://github.com/jcbages/pandoractl.git
 Go into the `pandoractl` folder:
 
 ```bash
-$ mv <path_to_pandoractl_folder>
+$ cd <path_to_pandoractl_folder>
 ```
 
 Install the required dependencies:
