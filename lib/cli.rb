@@ -114,6 +114,15 @@ class API
         end
     end
 
+    def set_permission(service_id, permission_name, permission_type)
+        status, body = post("#{BASE_URL}/_admin/service/#{service_id}/permission", body: {permission_name => permission_type}, auth: true)
+        if status != 200
+            [false, body['message']]
+        else
+            [true, body]
+        end
+    end
+
     def set_custom_host(service_id, custom_host)
         status, body = post("#{BASE_URL}/_admin/service/#{service_id}/custom_host", body: {custom_host: custom_host}, auth: true)
         if status != 200
@@ -188,6 +197,16 @@ class CLI < Thor
     desc 'create_service NAME', 'Create a new service'
     def create_service(name)
         ok, result = @api.create_service(name)
+        if !ok
+            $stderr.puts "❌ Error: #{result}"
+        else
+            puts JSON.pretty_generate(result)
+        end
+    end
+
+    desc 'set_permission SERVICE_ID PERMISSION_NAME PERMISSION_TYPE', 'Modify the permissions for the given SERVICE_ID'
+    def set_permission(service_id, permission_name, permission_type)
+        ok, result = @api.set_permission(service_id, permission_name, permission_type)
         if !ok
             $stderr.puts "❌ Error: #{result}"
         else
