@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/RD17/ambar/blob/master/License.txt)
 
-:battery: A CLI for performing admin operations. It's a wrapper around admin API endpoints for making it easier to interact with the Pandora system.
+:battery: A CLI for performing admin operations. It's a wrapper around admin API endpoints for making it easier to interact with the [pandora](https://github.com/jcbages/pandora) system.
 
 # Prerequisites
 
