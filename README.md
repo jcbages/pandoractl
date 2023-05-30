@@ -1,4 +1,5 @@
-`pandoractl` is a CLI for performing admin operations. It's a wrapper around admin API endpoints for making it easier to interact with the Pandora system.
+# pandoractl
+:battery: A CLI for performing admin operations. It's a wrapper around admin API endpoints for making it easier to interact with the Pandora system.
 
 # Prerequisites
 
